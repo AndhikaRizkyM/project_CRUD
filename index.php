@@ -1,16 +1,21 @@
 <?php
 session_start();
 session_regenerate_id();
+
+include "config/koneksi.php";
 if (isset($_POST['login'])) {
   $email = $_POST['email'];
   $password = $_POST['password'];
 
-  $dataNama = 'Andhika Rizky';
-  $dataEmail = 'a@gmail.com';
-  $dataPassword = '12';
+  // $dataNama = 'Andhika Rizky';
+  // $dataEmail = 'a@gmail.com';
+  // $dataPassword = '12';
 
-  if ($email == $dataEmail && $password == $dataPassword) {
-    $_SESSION['NAMA'] = $dataNama;
+  $login = mysqli_query($koneksi, "SELECT * FROM users WHERE email = '$email'");
+  $rowLogin = mysqli_fetch_assoc($login);
+
+  if ($email == $rowLogin['email'] && $password == $rowLogin['password']) {
+    $_SESSION['NAMA'] = $rowLogin['name'];
     header("location:main.php?page=dashboard");
   } else {
     header("location:index.php");
@@ -47,7 +52,7 @@ if (isset($_POST['login'])) {
     name="viewport"
     content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>Login Basic - Pages | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+  <title>Login Pages</title>
 
   <meta name="description" content="" />
 
@@ -148,8 +153,8 @@ if (isset($_POST['login'])) {
               </a>
             </div>
             <!-- /Logo -->
-            <h4 class="mb-2">Welcome to Sneat! 👋</h4>
-            <p class="mb-4">Please sign-in to your account and start the adventure</p>
+            <h4 class="mb-2">Welcome to My Profile! 👋</h4><br>
+            <p class="mb-4">Silakan isi Email dan Password </p>
 
             <form id="formAuthentication" class="mb-3" action="" method="POST">
               <div class="mb-3">
