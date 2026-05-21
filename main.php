@@ -4,7 +4,8 @@ session_regenerate_id();
 ob_start();
 
 include "config/koneksi.php";
-include "config/function.php";
+include "config/alert.php";
+include "config/helper.php";
 if (!isset($_SESSION['NAMA'])) {
   header('location:index.php');
   exit();
@@ -77,6 +78,7 @@ if (!isset($_SESSION['NAMA'])) {
 </head>
 
 <body>
+
   <!-- Layout wrapper -->
   <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">

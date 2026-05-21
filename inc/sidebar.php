@@ -67,11 +67,20 @@
     <!-- Users -->
     <li class="menu-item">
       <a href="?page=user" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-layout"></i>
+        <i class="menu-icon tf-icons bx bx-user"></i>
         <div data-i18n="Users">Users</div>
       </a>
+    </li>
 
-      <!-- Layouts -->
+    <!-- Role -->
+    <li class="menu-item">
+      <a href="?page=role" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-user"></i>
+        <div data-i18n="Users">Role</div>
+      </a>
+    </li>
+
+    <!-- Layouts -->
     <li class="menu-item">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-layout"></i>

@@ -2,10 +2,21 @@
 session_start();
 session_regenerate_id();
 
+// php
+// $, const,
+// var, system/superglobal : $_POST, $_GET, $_SESSION, $_COOKIES
+// isset = tidak kosong, !isset = kosong
+// empty = kosong, !kosong = tidak kosong
+// $_SESSION : nyimpen data di dalam memory browser
+// $_COOKIES : nyimpen data di dalam memory browser
+
+// perbedaan js dan php, jika php mengambil data biasanya hanya dari atribut name, sedangkan js bisa mengambil semua atribut contoh class id, name akan tetapi lebih sering class/id
+
+
 include "config/koneksi.php";
 if (isset($_POST['login'])) {
   $email = $_POST['email'];
-  $password = $_POST['password'];
+  $password = sha1($_POST['password']);
 
   // $dataNama = 'Andhika Rizky';
   // $dataEmail = 'a@gmail.com';
@@ -36,7 +47,7 @@ if (isset($_POST['login'])) {
 * Copyright ThemeSelection (https://themeselection.com)
 
 =========================================================
- -->
+-->
 <!-- beautify ignore:start -->
 <html
   lang="en"
@@ -52,7 +63,7 @@ if (isset($_POST['login'])) {
     name="viewport"
     content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>Login Pages</title>
+  <title>Login Page</title>
 
   <meta name="description" content="" />
 
