@@ -16,7 +16,7 @@ if (isset($_GET['idDelete'])) {
 
 <div class="card">
   <h2 class="card-header mb-3 mt-2 fw-bold">
-    User Data
+    Users Management
   </h2>
   <div class="card-body">
     <div class="mb-3 me-3" align='right'>

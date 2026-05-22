@@ -54,14 +54,14 @@ if (isset($_POST['edit'])) {
           <label for="" class="form-table mb-2">Status *</label><br>
           <div class="btn-group" role="group" aria-label="radio toggle button status">
             <div class="form-check me-3">
-              <input class="form-check-input" type="radio" name="status" id="radioDefault1" value="1"
+              <input class="form-check-input" type="radio" name="status" id="radioDefault1" value="1" checked
                 <?php echo isset($_GET['edit']) ? ($rEdit['is_active'] == 1 ? 'checked' : '') : 'checked' ?>>
               <label class="form-check-label" for="radioDefault1">
                 Active
               </label>
             </div><br>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="status" id="radioDefault2" value="0" checked
+              <input class="form-check-input" type="radio" name="status" id="radioDefault2" value="0"
                 <?php echo isset($_GET['edit']) ? ($rEdit['is_active'] == 0 ? 'checked' : '') : '' ?>>
               <label class="form-check-label" for="radioDefault2">
                 Inactive
@@ -74,20 +74,21 @@ if (isset($_POST['edit'])) {
       </div>
       <div class="row mb-4">
         <div class="col-md-12 mb-3">
-          <label for="" class="form-table">Description *</label>
+          <label for="" class="form-lable">Description *</label>
           <textarea name="description" id="" class="form-control" placeholder="Add Your Description"
             value="<?php echo isset($_GET['edit']) ? $rEdit['description'] : '' ?>"></textarea>
         </div>
         <?php if ($id): ?>
           <div class="mt-2 ms-3 text-secondary">
-            <p>*Leave blank if you dont want to change the password</p>
+            <p>*Leave blank if you dont want to change description</p>
+          <?php endif ?>
+          <div class="text-end mt-4">
+            <button type="submit" name="<?php echo isset($_GET['edit']) ? 'edit' : 'add' ?>"
+              class="btn btn-primary me-2"><?php echo isset($_GET['edit']) ? 'Edit' : 'Add' ?> Role</button>
+            <a href="?page=role" class="btn btn-danger">Cancel</a>
           </div>
-        <?php endif ?>
-        <div class="text-end mt-4">
-          <button type="submit" name="<?php echo isset($_GET['edit']) ? 'edit' : 'add' ?>"
-            class="btn btn-primary me-2"><?php echo isset($_GET['edit']) ? 'Edit' : 'Add' ?> Role</button>
-          <a href="?page=role" class="btn btn-danger">Cancel</a>
-        </div>
+          </div>
+      </div>
     </form>
   </div>
 </div>

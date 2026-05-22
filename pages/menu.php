@@ -3,13 +3,13 @@ include "config/koneksi.php";
 // include "config/function.php";
 
 // mysqli_fetch ini berfungsi sebagai pemanggilan data
-$query = mysqli_query($koneksi, "SELECT * from roles ORDER BY id ASC");
+$query = mysqli_query($koneksi, "SELECT parent.name AS parent_name, menus.* FROM menus LEFT JOIN menus AS parent ON parent.id = menus.parent_id ORDER BY menus.id DESC");
 $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
 if (isset($_GET['delete'])) {
   $id = $_GET['delete'];
-  $delete = mysqli_query($koneksi, "DELETE FROM roles WHERE id='$id'");
-  header("location:?page=role");
+  $delete = mysqli_query($koneksi, "DELETE FROM menus WHERE id='$id'");
+  header("location:?page=menu");
   exit();
 }
 
@@ -20,17 +20,17 @@ if (isset($_GET['delete'])) {
 
 <div class="card">
   <h2 class="card-header mb-3 mt-2 fw-bold">
-    Roles Management
+    Menu Management
   </h2>
   <div class="card-body">
     <div class="mb-3 me-3" align='right'>
-      <a href="?page=role-create-edit" class="btn btn-primary">Create New Role</a>
+      <a href="?page=menu-create-edit" class="btn btn-primary">Create New Menu</a>
     </div>
     <div class="table-responsive">
       <?php
       if (isset($_GET['status']) && $_GET['status'] == 'success') {
         $status = "Data has been successfully added!";
-        $location = "?page=role";
+        $location = "?page=menu";
         echo statusSuccess($status, $location);
       }
       ?>
@@ -38,8 +38,11 @@ if (isset($_GET['delete'])) {
         <thead>
           <tr>
             <th>No.</th>
-            <th>Name</th>
-            <th>Description</th>
+            <th>Parent Name</th>
+            <th>Menu Name</th>
+            <th>Url</th>
+            <th>icon</th>
+            <th>Sort Order</th>
             <th>Status</th>
             <th>Actions</th>
           </tr>
@@ -52,14 +55,17 @@ if (isset($_GET['delete'])) {
               <td>
                 <?php echo $index + 1 ?>
               </td>
+              <td><?php echo $r['parent_name'] ?></td>
               <td><?php echo $r['name'] ?></td>
-              <td><?php echo $r['description'] ?></td>
+              <td><?php echo $r['url'] ?></td>
+              <td><?php echo $r['icon'] ?></td>
+              <td><?php echo $r['sort_order'] ?></td>
               <td><?php echo getStatus($r['is_active'])  ?></td>
               <td class="">
-                <a href="?page=role-create-edit&edit=<?php echo $r['id'] ?>" class="btn btn-success">Edit</a>
-                <form action="?page=role&delete=<?php echo $r['id'] ?>" method="post" class="d-inline">
+                <a href="?page=menu-create-edit&edit=<?php echo $r['id'] ?>" class="btn btn-success">Edit</a>
+                <form action="?page=menu&delete=<?php echo $r['id'] ?>" method="post" class="d-inline">
                   <button class="btn btn-danger"
-                    onclick="return confirm('Are you sure want delete this data?')">Delete</button>
+                    onclick="return confirm('Are you sure want delete this menu?')">Delete</button>
                 </form>
               </td>
             </tr>
