@@ -19,7 +19,6 @@ if (isset($_POST['add'])) {
 // membuat parameter status untuk alert status
 $status = $_GET['status'] ?? '';
 
-
 // $id = isset($_GET['idEdit']) ? $_GET['idEdit'] : '';
 $id = $_GET['edit'] ?? '';
 $selectMenu = mysqli_query($koneksi, "SELECT * FROM menus WHERE id='$id' ");

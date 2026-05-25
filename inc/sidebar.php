@@ -103,7 +103,7 @@ $menus = mysqli_query($koneksi, 'SELECT * FROM menus where parent_id is null and
           </ul>
           <!-- kalo submenu tidak ada -->
         <?php else: ?>
-          <a href="main.php?page=dashboard" class="menu-link">
+          <a href="?page=<?= $menu['url'] ?>" class="menu-link">
             <i class="menu-icon tf-icons bx <?= $menu['icon'] ?>"></i>
             <div data-i18n="Analytics"><?= $menu['name'] ?></div>
           </a>

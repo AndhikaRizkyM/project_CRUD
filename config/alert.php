@@ -9,3 +9,8 @@ function statusSuccess($status, $location)
   }, 5000);
 </script>";
 }
+
+function inputFailed($status)
+{
+  return "<span class='text-danger' role'alert'>$status</span>";
+}
