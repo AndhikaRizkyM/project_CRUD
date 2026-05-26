@@ -23,3 +23,8 @@
 <link rel="stylesheet" href="assets/template/assets/vendor/libs/apex-charts/apex-charts.css" />
 
 <!-- Page CSS -->
+
+<!-- tinyMCE -->
+<link href="
+https://cdn.jsdelivr.net/npm/tinymce@7.4.0/skins/ui/oxide/skin.min.css
+" rel="stylesheet">

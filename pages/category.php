@@ -13,7 +13,7 @@ if (isset($_GET['idDelete'])) {
 ?>
 <div class="card">
   <h2 class="card-header mb-3 mt-2 fw-bold">
-    Category
+    Category Management
   </h2>
   <div class="card-body">
     <div class="mb-4 d-flex justify-content-end">
@@ -23,14 +23,6 @@ if (isset($_GET['idDelete'])) {
       <?php
       if (isset($_GET['status']) && $_GET['status'] == 'success') {
         $status = "Data has been successfully added!";
-        $location = "?page=category";
-        echo statusSuccess($status, $location);
-      }
-      ?>
-      <?php
-      if (isset($_GET['status']) && $_GET['status'] == 'success') {
-        $status = "Data has been successfully added!";
-        $location = "?page=category";
         echo statusSuccess($status, $location);
       }
       ?>
@@ -45,14 +37,14 @@ if (isset($_GET['idDelete'])) {
         </thead>
         <tbody>
           <?php
-          foreach ($rows as $index => $v) {
+          foreach ($rows as $index => $c) {
           ?>
             <tr>
               <td><?php echo $index + 1 ?></td>
-              <td><?php echo $v['category_name'] ?></td>
-              <td><?php echo getStatus($v['is_active'])  ?></td>
-              <td><a href="?page=create-category&idEdit=<?php echo $v['id'] ?>" class="btn btn-success">Edit</a>
-                <form action="?page=category&idDelete=<?php echo $v['id'] ?>" method="post" class="d-inline">
+              <td><?php echo $c['category_name'] ?></td>
+              <td><?php echo getStatus($c['is_active'])  ?></td>
+              <td><a href="?page=create-category&idEdit=<?php echo $c['id'] ?>" class="btn btn-success">Edit</a>
+                <form action="?page=category&idDelete=<?php echo $c['id'] ?>" method="post" class="d-inline">
                   <button class="btn btn-danger"
                     onclick="return confirm('Are you sure want delete this category?')">Delete</button>
                 </form>

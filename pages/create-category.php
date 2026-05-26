@@ -22,7 +22,7 @@ $status = $_GET['status'] ?? '';
 
 $id = $_GET['idEdit'] ?? '';
 $selectCategory = mysqli_query($koneksi, "SELECT * FROM categories WHERE id='$id' ");
-$vEdit = mysqli_fetch_assoc($selectCategory);
+$cEdit = mysqli_fetch_assoc($selectCategory);
 
 if (isset($_POST['edit'])) {
   $name = $_POST['name'];
@@ -64,20 +64,20 @@ if (isset($_POST['edit'])) {
         <div class="col-md-12 mb-3">
           <label for="" class="form-table mb-2">Category Name *</label>
           <input type="text" name="name" class="form-control" placeholder="Add Category" required
-            value="<?php echo isset($_GET['idEdit']) ? $vEdit['category_name'] : '' ?>">
+            value="<?php echo isset($_GET['idEdit']) ? $cEdit['category_name'] : '' ?>">
         </div>
         <label for="" class="form-table mb-2">Status *</label><br>
         <div class="btn-group" role="group" aria-label="radio toggle button status">
           <div class="form-check me-3">
             <input class="form-check-input" type="radio" name="status" id="radioDefault1" value="1" checked
-              <?php echo isset($_GET['idEdit']) ? ($vEdit['is_active'] == 1 ? 'checked' : '') : 'checked' ?>>
+              <?php echo isset($_GET['idEdit']) ? ($cEdit['is_active'] == 1 ? 'checked' : '') : 'checked' ?>>
             <label class="form-check-label" for="radioDefault1">
               Active
             </label>
           </div><br>
           <div class="form-check">
             <input class="form-check-input" type="radio" name="status" id="radioDefault2" value="0"
-              <?php echo isset($_GET['idEdit']) ? ($vEdit['is_active'] == 0 ? 'checked' : '') : '' ?>>
+              <?php echo isset($_GET['idEdit']) ? ($cEdit['is_active'] == 0 ? 'checked' : '') : '' ?>>
             <label class="form-check-label" for="radioDefault2">
               Inactive
             </label>
@@ -87,7 +87,7 @@ if (isset($_POST['edit'])) {
         if (isset($_GET['status']) && $_GET['status'] == 'category-exist') {
           $status = "Category Name Already Exist!";
           $location = "?page=create-category";
-          echo inputFailed($status, $location);
+          echo inputFailed($status);
         }
         ?>
       </div>
