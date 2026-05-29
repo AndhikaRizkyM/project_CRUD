@@ -1,6 +1,4 @@
 <?php
-
-include 'config/koneksi.php';
 $selectCategory = mysqli_query($koneksi, "SELECT * FROM categories ORDER BY id ASC");
 $categories = mysqli_fetch_all($selectCategory, MYSQLI_ASSOC);
 
@@ -14,12 +12,12 @@ $products = mysqli_fetch_all($selectProduct, MYSQLI_ASSOC);
       <?php
       foreach ($categories as $key => $cat) {
       ?>
-        <li class="nav-item">
-          <button class="nav-link <?= $key === 0 ? 'active' : '' ?>" data-bs-toggle="tab"
-            data-bs-target="#tab-pane-<?= $cat['id'] ?>">
-            <?= $cat['category_name'] ?>
-          </button>
-        </li>
+      <li class="nav-item">
+        <button class="nav-link <?= $key === 0 ? 'active' : '' ?>" data-bs-toggle="tab"
+          data-bs-target="#tab-pane-<?= $cat['id'] ?>">
+          <?= $cat['category_name'] ?>
+        </button>
+      </li>
       <?php
       }
       ?>
@@ -28,12 +26,12 @@ $products = mysqli_fetch_all($selectProduct, MYSQLI_ASSOC);
     <div class="tab-content mt-3">
       <?php
       foreach ($categories as $key => $cat) { ?>
-        <div class="tab-pane fade <?= $key === 0 ? 'show active' : '' ?> " id="tab-pane-<?= $cat['id'] ?>">
+      <div class="tab-pane fade <?= $key === 0 ? 'show active' : '' ?> " id="tab-pane-<?= $cat['id'] ?>">
 
-          <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex justify-content-between align-items-center mb-3">
 
-            <div class="fw-semibold">
-              <?php
+          <div class="fw-semibold">
+            <?php
               $count = 0;
               foreach ($products as $p) {
                 if ($p['category_id'] == $cat['id']) {
@@ -41,68 +39,68 @@ $products = mysqli_fetch_all($selectProduct, MYSQLI_ASSOC);
                 }
               }
               ?>
-              <span class="fs-5"><?= $count ?></span> Products
-            </div>
-
-            <div class="flex-grow-1 mx-3">
-              <input type="text" class="form-control" placeholder="Search">
-            </div>
-
+            <span class="fs-5"><?= $count ?></span> Products
           </div>
 
-          <div class="row g-3">
-
-            <?php
-            foreach ($products as $product) {
-              if ($product["category_id"] == $cat["id"]) {
-            ?>
-                <div class="col-md-4">
-
-                  <div class="card product-card h-100 shadow-sm">
-
-                    <div class="p-3 text-center">
-
-                      <h6 class="mb-1"><?= $product['product_name'] ?></h6>
-
-                      <small class="text-muted">
-                        <?= $product['category_name'] ?>
-                      </small>
-
-                      <div class="mt-2">
-                        <img src="assets/uploads/<?= $product['product_image'] ?>" class="img-fluid"
-                          style="max-height:150px; object-fit:cover;">
-                      </div>
-
-                    </div>
-
-                    <div class="px-3 pb-3 text-center">
-
-                      <h6 class="fw-bold">
-                        Rp <?= number_format($product['price']) ?>
-                      </h6>
-
-                      <p class="text-muted">
-                        Ready <?= $product['quantity'] ?> <?= $product['unit'] ?>
-                      </p>
-                    </div>
-                    <div class="px-3 pb-3 d-flex justify-content-center gap-2">
-                      <button type="button" class="btn btn-primary btn-sm btn-add-cart" data-id="<?= $product['id'] ?>"
-                        data-name="<?= $product['product_name'] ?>" data-price="<?= $product['price'] ?>"
-                        data-image="assets/uploads/<?= $product['product_image'] ?>">
-                        Add To Cart
-                      </button>
-                    </div>
-
-                  </div>
-
-                </div>
-              <?php
-              } ?>
-
-            <?php } ?>
+          <div class="flex-grow-1 mx-3">
+            <input type="text" class="form-control" placeholder="Search">
           </div>
 
         </div>
+
+        <div class="row g-3">
+
+          <?php
+            foreach ($products as $product) {
+              if ($product["category_id"] == $cat["id"]) {
+            ?>
+          <div class="col-md-4">
+
+            <div class="card product-card h-100 shadow-sm">
+
+              <div class="p-3 text-center">
+
+                <h6 class="mb-1"><?= $product['product_name'] ?></h6>
+
+                <small class="text-muted">
+                  <?= $product['category_name'] ?>
+                </small>
+
+                <div class="mt-2">
+                  <img src="assets/uploads/<?= $product['product_image'] ?>" class="img-fluid"
+                    style="max-height:150px; object-fit:cover;">
+                </div>
+
+              </div>
+
+              <div class="px-3 pb-3 text-center">
+
+                <h6 class="fw-bold">
+                  Rp <?= number_format($product['price']) ?>
+                </h6>
+
+                <p class="text-muted">
+                  Ready <?= $product['quantity'] ?> <?= $product['unit'] ?>
+                </p>
+              </div>
+              <div class="px-3 pb-3 d-flex justify-content-center gap-2">
+                <button type="button" class="btn btn-primary btn-sm btn-add-cart" data-id="<?= $product['id'] ?>"
+                  data-name="<?= $product['product_name'] ?>" data-price="<?= $product['price'] ?>"
+                  data-image="assets/uploads/<?= $product['product_image'] ?>">
+                  Add To Cart
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+          <?php
+              } ?>
+
+          <?php } ?>
+        </div>
+
+      </div>
       <?php } ?>
 
 
@@ -236,7 +234,6 @@ $products = mysqli_fetch_all($selectProduct, MYSQLI_ASSOC);
       </div>
 
       <form action="" method="POST">
-        <input type="text" name="cart-data" id="cart-data" class="form-control">
         <div class="modal-body p-4">
 
           <h5 class="mb-3">Pilih Metode Pembayaran</h5>
@@ -321,45 +318,44 @@ $products = mysqli_fetch_all($selectProduct, MYSQLI_ASSOC);
 </div>
 
 <script>
-  let cart = [];
+let cart = [];
 
-  document.addEventListener('click', function(e) {
-    if (e.target && e.target.classList.contains('btn-add-cart')) {
-      const id = e.target.getAttribute('data-id');
-      const name = e.target.getAttribute('data-name');
-      const price = e.target.getAttribute('data-price');
-      const image = e.target.getAttribute('data-image');
-      const extProduct = cart.find(item => item.id === id);
-      if (extProduct) {
-        extProduct.qty += 1;
-      } else {
-        cart.push({
-          id,
-          name,
-          price,
-          image,
-          qty: 1
-        })
-      }
+document.addEventListener('click', function(e) {
+  if (e.target && e.target.classList.contains('btn-add-cart')) {
+    const id = e.target.getAttribute('data-id');
+    const name = e.target.getAttribute('data-name');
+    const price = e.target.getAttribute('data-price');
+    const image = e.target.getAttribute('data-image');
+    const extProduct = cart.find(item => item.id === id);
+    if (extProduct) {
+      extProduct.qty += 1;
+    } else {
+      cart.push({
+        id,
+        name,
+        price,
+        image,
+        qty: 1
+      })
     }
+  }
 
 
-    renderCart()
-  });
+  renderCart()
+});
 
-  function renderCart() {
-    const containerCart = document.getElementById('order-items');
-    containerCart.innerHTML = "";
+function renderCart() {
+  const containerCart = document.getElementById('order-items');
+  containerCart.innerHTML = "";
 
+  if (cart.length === 0) {
+    containerCart.innerHTML = "<p class='text-muted text-center py-3>Cart Empty</p>"
+    updateCart();
+    return;
+  }
 
-    if (cart.length === 0) {
-      containerCart.innerHTML = "<p class='text-muted text-center py-3'>Cart Empty</p>"
-      updateCart();
-      return;
-    }
-
-    cart.forEach(value => {
-      const itemHtml = `
+  cart.forEach(value => {
+    const itemHtml = `
             <div class="card p-2 mb-2 border-0 shadow-sm">
 
                     <div class="d-flex justify-content-between align-items-center">
@@ -399,68 +395,70 @@ $products = mysqli_fetch_all($selectProduct, MYSQLI_ASSOC);
 
                 </div>`;
 
-      containerCart.insertAdjacentHTML("beforeend", itemHtml);
-    })
-    updateCart();
-  }
+    containerCart.insertAdjacentHTML("beforeend", itemHtml);
+  })
 
-  document.getElementById('order-items').addEventListener('click', function(e) {
-    const id = e.target.getAttribute('data-id');
-    if (!id) return;
+  updateCart();
+}
 
-    const itemIndex = cart.findIndex(item => item.id === id);
-    if (e.target.classList.contains('btn-plus')) {
-      cart[itemIndex].qty += 1;
-    } else if (e.target.classList.contains('btn-minus')) {
-      if (cart[itemIndex].qty > 1) {
-        cart[itemIndex].qty -= 1;
-      } else {
-        cart.splice(itemIndex, 1)
-      }
-    } else if (e.target.classList.contains('btn-delete')) {
+document.getElementById('order-items').addEventListener('click', function(e) {
+  const id = e.target.getAttribute('data-id');
+  if (!id) return;
+
+  const itemIndex = cart.findIndex(item => item.id === id);
+  if (e.target.classList.contains('btn-plus')) {
+    cart[itemIndex].qty += 1;
+  } else if (e.target.classList.contains('btn-minus')) {
+    if (cart[itemIndex].qty > 1) {
+      cart[itemIndex].qty -= 1;
+    } else {
       cart.splice(itemIndex, 1)
     }
+  } else if (e.target.classList.contains('btn-delete')) {
+    cart.splice(itemIndex, 1)
+  }
+})
+
+function updateCart() {
+  let subtotal = 0;
+  let tax = 0;
+  let discount = 0;
+
+  cart.forEach(item => {
+    subtotal += item.price * item.qty;
   })
+  tax = 0.1 * subtotal;
+  let total = subtotal + tax - discount;
 
-  function updateCart() {
-    let subtotal = 0;
-    let tax = 0;
-    let discount = 0;
-
-    cart.forEach(item => {
-      subtotal += item.price * item.qty
-    })
-    tax = subtotal * 0.1;
-    let total = subtotal + tax - discount;
-
-    const formatRupiah = (number) => {
-      return "Rp." + number.toLocaleString('id-ID');
-    }
-
-    document.getElementById('subtotal').innerText = formatRupiah(subtotal);
-    document.getElementById('tax').innerText = formatRupiah(tax);
-    document.getElementById('discount').innerText = formatRupiah(discount);
-    document.getElementById('total-bill').innerText = formatRupiah(total);
-
-    const cartModal = document.querySelector('#paymentModal .border.rounded-3');
-    if (cartModal) {
-      const spans = cartModal.querySelectorAll('span');
-      if (spans.length >= 8) {
-        spans[1].innerText = formatRupiah(subtotal);
-        spans[3].innerText = formatRupiah(tax);
-        spans[5].innerText = "-" + formatRupiah(discount);
-        spans[7].innerText = formatRupiah(total);
-
-      }
-    }
-
-    document.getElementById('cart-data').value = JSON.stringify(cart);
+  const formatRupiah = (number) => {
+    return "Rp." + number.toLocalString('id-ID')
   }
 
-  document.getElementById('btn-payment').addEventListener('click', (e) => {
-    if (cart.length === 0) {
-      alert('Cart is Empty!');
-      e.stopPropagation();
-    }
-  })
+  document.getElementById('subtotal').innerText = formatRupiah(subtotal);
+  document.getElementById('tax').innerText = formatRupiah(tax);
+  document.getElementById('discount').innerText = formatRupiah(discount);
+  document.getElementById('total-bill').innerText = formatRupiah(total);
+
+  const cartModal = document.querySelector('#paymentModal . border.rounded-3');
+}
+if (cartModal) {
+  const spans = carModal.querySelectorAll('span');
+  if (spans.length >= 0) {
+    spans[1].innerText = formatRupiah(subtotal);
+    spans[3].innerText = formatRupiah(tax);
+    spans[5].innerText = "-"
+    formatRupiah(discount);
+    spans[7].innerText = formatRupiah(total);
+  }
+}
+
+document.getElementById('btn-payment').addEventListener('click', () => {
+  if (cart.length === 0) {
+    alert('Cart is Empty!');
+
+    // stopPropagation : buat modal tidak muncul
+
+    e.stopPropagation();
+  }
+})
 </script>
